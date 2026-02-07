@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <!-- Welcome Card -->
+        <div class="card shadow-sm p-4 mb-4">
+            <h3 class="mb-3">Dashboard</h3>
+
+            <p class="mb-1">
+                 Welcome, <strong>{{ user.username }}</strong>
+            </p>
+
+            <p>
+                Role: 
+                <span class="badge bg-{{ 'danger' if user.role == 'admin' else 'secondary' }}">
+                    {{ user.role }}
+                </span>
+            </p>
+
+            <hr>
+
+            <p class="text-success mb-0">
+                 You are logged in securely.
+            </p>
+        </div>
+
+        <!-- Admin Panel -->
+        {% if is_admin %}
+        <div class="card border-info shadow-sm p-4 mb-4">
+            <h5 class="text-info"> Admin Panel</h5>
+            <p class="mb-2">You have elevated privileges.</p>
+
+            <div class="alert alert-info mb-0">
+                Admin-only access enabled. You can manage users and monitor system activity.
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Security Info Card -->
+        <div class="card shadow-sm p-4">
+            <h5>🛡 Security Status</h5>
+            <ul class="mb-0">
+                <li>Session protected</li>
+                <li>CSRF protection active</li>
+                <li>Rate limiting enabled</li>
+                <li>Password hashing enforced</li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
